@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "STM32 L4",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "USE_HAL_DRIVER",
+                "STM32L476xx"
+            ],
+            "intelliSenseMode": "gcc-arm",
+            "compilerPath": "${env:ARMGCC_DIR}/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mcpu=cortex-m4",
+                "-mthumb"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
