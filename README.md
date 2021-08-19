@@ -8,7 +8,7 @@
     * [STM32CubeMX](#STM32CubeMX)
     * [Source Code](#Source-Code)
     * [Serial Communication](#Serial-Communication)
-* [Compile & Debug Tools](#Compile-&-Debug-Tools)
+* [Build Tools](#Build-Tools)
     * [VSCode Editor](#VSCode-Editor)
     * [Flash Executable](#Flash-Executable)
 
@@ -49,7 +49,7 @@ The user may only enter capital letters and arabic numerals to the terminal. Oth
 
 The <b>PuTTY SSH</b> client is used to establish a terminal connection with the <b>STM32</b> device.
 
-## Compile & Debug Tools
+## Build Tools
 
 ### VSCode Editor
 
