@@ -81,7 +81,10 @@ flash: all
 
 The videos in the [`Demonstration`](Demonstration) directory show the input via keyboard as well as the output on the <b>STM32 Nucleo Board</b>. I have embedded a low resolution compressed version below.
 
-https://user-images.githubusercontent.com/52113009/130340062-9a8ce61d-4a7d-486b-936f-363cfbcd9d2f.mp4
+
+
+https://user-images.githubusercontent.com/52113009/130340990-af157688-376e-429a-9239-4267415a930c.mp4
+
 
 The following image shows the <b>UART Communication</b> to the terminal for the output shown in the video.
 
