@@ -11,18 +11,18 @@
 * [Build Tools](#Build-Tools)
     * [VSCode Editor](#VSCode-Editor)
     * [Flash Executable](#Flash-Executable)
-
+* [Demonstration](#Demonstration)
 
 ## Overview
 
-This was originally designed as part of a <b>UBC Orbit Command and Data Handling (CDH)</b> subsystem assignment. However, it has been recently redesigned to explore embedded programming practices on the <b>STM32 Nucleo Board</b>.
+This was originally designed as part of a <b>UBC Orbit Command and Data Handling (CDH)</b> subsystem assignment. However, it has been recently redesigned to further explore embedded programming practices on the <b>STM32 Nucleo Board</b>.
 
 <p align="center"><img src="Images/Board.JPG" width="60%" height="60%" title="Image of STM32 Nucleo Board" ></p>
 
 
 ### Features
 
-A project is implemented to blink the <b>LD2</b> LED pin on the <b>STM32L47RG</b> and communicate with the computer terminal via <b>UART Serial Communication</b>.
+A project is implemented to blink the <b>LD2</b> LED pin on the <b>STM32L476RG</b> and communicate with the computer terminal via <b>UART Serial Communication</b>.
 This involved sending an <b>ASCII</b> phrase of a specified length to a serial <b>COM</b> port. The morse translation of the phrase is output onto the <b>LED</b>.
 
 <p align="center"><img src="Images/Layout.JPG" width="60%" height="60%" title="Layout of STM32 Nucleo Board from Top" ></p>
@@ -47,7 +47,9 @@ The <b>UART</b> module which communicates with the user is set in blocking mode.
 
 The user may only enter capital letters and arabic numerals to the terminal. Otherwise the ```void invalidInput();``` function is called to send an *ERROR* message to perform a software reset on the <b>STM32</b> system.
 
-The <b>PuTTY SSH</b> client is used to establish a terminal connection with the <b>STM32</b> device.
+The <b>PuTTY SSH</b> client is used to establish a terminal connection with the <b>STM32</b> device as shown below.
+
+<p align="center"><img src="Images/PuTTY_Configuration.JPG" height="40%" width="40%" title="Configuration of PuTTY SSH client for UART Communication." ></p>
 
 ## Build Tools
 
@@ -61,7 +63,7 @@ Importing the <b>System View Description</b> from the [(`STM32L4x6.svd`)](STM32L
 
 ### Flash Executable
 
-Flashing the [(`Morse_Translator.elf`)](/build/Morse_Translator.elf) executable onto the <b>STM32 Nucleo Board</b> required the <b>ARM GCC</b> <b>C</b> Compiler, <b>Make</b> Automation Tool, and the <b>Open On-Chip Debugger (OpenOCD) Debugger</b> for Embedded Devices.
+Flashing the (`Morse_Translator.elf`) executable onto the <b>STM32 Nucleo Board</b> required the <b>ARM GCC</b> <b>C</b> Compiler, <b>Make</b> Automation Tool, and the <b>Open On-Chip Debugger (OpenOCD) Debugger</b> for Embedded Devices.
 
 These tools were added to the <b>System Path</b> on the <b>Windows OS</b>.
 
@@ -75,5 +77,14 @@ flash: all
 	openocd -f interface/stlink.cfg -f target/stm32l4x.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
 ```
 
+## Demonstration
+
+The videos in the [`Demonstration`](Demonstration) directory show the input via keyboard as well as the output on the <b>STM32 Nucleo Board</b>. I have embedded a low resolution compressed version below.
+
+https://user-images.githubusercontent.com/52113009/130340062-9a8ce61d-4a7d-486b-936f-363cfbcd9d2f.mp4
+
+The following image shows the <b>UART Communication</b> to the terminal for the output shown in the video.
+
+<p align="center"><img src="Images/UART_Communication.JPG" height="40%" width="40%" title="UART Communication with Terminal for Morse Translator." ></p>
 
 <i>Images are sourced from STM32 Datasheets.</i>
