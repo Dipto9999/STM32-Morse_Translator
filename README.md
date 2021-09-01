@@ -8,6 +8,7 @@
     * [STM32CubeMX](#STM32CubeMX)
     * [Source Code](#Source-Code)
     * [Serial Communication](#Serial-Communication)
+        * [DMA Controller](#DMA-Controller)
 * [Build Tools](#Build-Tools)
     * [VSCode Editor](#VSCode-Editor)
     * [Flash Executable](#Flash-Executable)
@@ -18,7 +19,6 @@
 This was originally designed as part of a <b>UBC Orbit Command and Data Handling (CDH)</b> subsystem assignment. However, it has been recently redesigned to further explore embedded programming practices on the <b>STM32 Nucleo Board</b>.
 
 <p align="center"><img src="Images/Board.JPG" width="60%" height="60%" title="Image of STM32 Nucleo Board" ></p>
-
 
 ### Features
 
@@ -43,13 +43,21 @@ The respective header file [(`main.h`)](Inc/main.h) is modified as well to inclu
 
 ### Serial Communication
 
-The <b>UART</b> module which communicates with the user is set in blocking mode. After the user has entered an input to the intended buffer, the <b>UART</b> module is set to echo the input to the terminal.
+The <b>UART</b> peripheral which communicates with the user is set in blocking mode. After the user has entered an input to the intended buffer, the <b>UART</b> peripheral is set to echo the input to the terminal.
 
-The user may only enter capital letters and arabic numerals to the terminal. Otherwise the ```void invalidInput();``` function is called to send an *ERROR* message to perform a software reset on the <b>STM32</b> system.
+The user may only enter capital letters and arabic numerals to the terminal. Otherwise the ```void Error_Handler();``` function is called to send an *ERROR* message and perform a software reset on the <b>STM32</b> system.
 
-The <b>PuTTY SSH</b> client is used to establish a terminal connection with the <b>STM32</b> device as shown below.
+The <b>PuTTY SSH</b> client is used to establish a terminal connection with the <b>STM32</b> device as shown below. Note that the terminal clearing functionality implemented in the ```void newPhrase();``` function is designed for the <b>PuTTY</b> client.
 
-<p align="center"><img src="Images/PuTTY_Configuration.JPG" height="40%" width="40%" title="Configuration of PuTTY SSH client for UART Communication." ></p>
+<p align="center"><img src="Images/PuTTY_Configuration.JPG" height="40%" width="40%" title="Configuration of PuTTY SSH client for UART Communication."></p>
+
+#### DMA Controller
+
+<b>Direct Memory Access (i.e. DMA)</b> is used to receive and transmit data directly between the <b>UART</b> peripheral and the memory. This speeds up the operations involving the input of the phrase and the subsequent echoing of the input to the terminal. <b>Polling</b> (i.e. blocking) operations are implemented for <b>UART</b> transmissions in the setup and error handling as we intend for these to be sequential with the code execution.
+
+The ```void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);``` callback function for the <b>USART2</b> global interrupt was implemented in the [(`main.c`)](Inc/main.c) source file. This is called when the line is idle momentarily or the data transfer is complete.
+
+<i>Note : <b>STM32CubeMX</b> initialized code was slightly modified to initialize the <b>DMA</b> prior to the <b>UART</b> peripheral. Otherwise the data would not be received in the intended buffer.</i>
 
 ## Build Tools
 
@@ -57,7 +65,11 @@ The <b>PuTTY SSH</b> client is used to establish a terminal connection with the 
 
 This project build and debug settings are specified in the [(`.vscode`)](.vscode) directory. The [(`launch.json`)](/.vscode/launch.json) and [(`c_cpp_properties.json`)](/.vscode/c_cpp_properties.json) were modified to integrate the debug functionality into <b>VSCode</b>.
 
-The <b>Cortex-Debug</b> Extension made it easier to look at register contents during runtime.
+The <b>Cortex-Debug</b> Extension made it easier to look at variables and register contents during runtime.
+
+<p align="center">
+    <img src="Images/Debug_Watches.JPG" width="40%" height="40%" title="Variable Watches Used to Debug Program." >
+</p>
 
 Importing the <b>System View Description</b> from the [(`STM32L4x6.svd`)](STM32L4x6.svd) file in the launch settings gave the ability to view the peripheral register values during runtime as well.
 
@@ -88,3 +100,7 @@ The following image shows the <b>UART Communication</b> to the terminal for the 
 <p align="center"><img src="Images/UART_Communication.JPG" height="70%" width="70%" title="UART Communication with Terminal for Morse Translator." ></p>
 
 <i>Images are sourced from STM32 Datasheets.</i>
+
+## Credit
+
+This project was recently modified following a <b>UART-DMA</b> tutorial from the <b><a href="https://controllerstech.com/uart-dma-with-idle-line-detection/">Controllers Tech</a> Youtube Channel</b>.

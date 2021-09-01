@@ -76,11 +76,14 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
-/******************************/
-/* Initiate Morse Conversion. */
-/******************************/
+/*******************/
+/* UART Tx and Rx. */
+/*******************/
 
-void convertPhraseToMorse();
+int getPhrase();
+void newPhrase();
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);
 
 /*****************************/
 /* Perform Morse Conversion. */
@@ -92,6 +95,7 @@ int returnMorseForCharacter(char input_character);
 /* GPIO Output on LED. */
 /***********************/
 
+void outputPhrase();
 void outputCharacter(char* morse_conversion, int length_morse);
 
 void outputDot();
@@ -115,20 +119,24 @@ void invalidInput();
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
-#define LD2_Pin GPIO_PIN_5
-#define LD2_GPIO_Port GPIOA
+#define Green_LED_Pin GPIO_PIN_5
+#define Green_LED_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
-
 /* USER CODE BEGIN Private defines */
 
 #define TRUE 1
 #define FALSE 0
 #define ERROR -1
+
+#define DOT '.'
+#define DASH '-'
+
+#define CLEAR_PUTTY "\033[3J"
 
 /* USER CODE END Private defines */
 
