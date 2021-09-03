@@ -75,10 +75,10 @@ static uint8_t rx_buff[LENGTH_PROMPT_MAX];
 /* Declare Variable for ASCII String to Convert into Morse Code. */
 static char phrase[LENGTH_PHRASE_MAX];
 
-static uint8_t phrase_length = FALSE;
+static uint8_t phrase_length;
 
-static uint8_t position_phrase = FALSE;
-static uint8_t remaining_phrase = TRUE;
+static uint8_t position_phrase;
+static uint8_t remaining_phrase;
 
 /* USER CODE END PV */
 
@@ -138,6 +138,11 @@ int main(void)
   MX_DMA_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  phrase_length = FALSE;
+
+  position_phrase = FALSE;
+  remaining_phrase = TRUE;
 
   if (getPhrase() == ERROR) Error_Handler();
 
@@ -432,7 +437,7 @@ void newPhrase() {
   position_phrase = FALSE;
 
   /* Modify Message Prompt. */
-  tx_buff = (uint8_t*)(strcpy(message_prompt, "\n\n\rNew Message...\n\r"));
+  tx_buff = (uint8_t*)(strcpy(message_prompt, "\n\n\rNew Phrase...\n\r"));
   /* Transmit Message Prompt in Polling Mode. */
   HAL_UART_Transmit(
       &huart2, // UART Handler
@@ -605,7 +610,7 @@ void changeWord() {
  * Send an Error Message to the Terminal and Reset System.
  *
  * PARAM: VOID
- * PRE: invalid input received in terminal.
+ * PRE: invalid setup of program.
  * POST: stm32 system undergoes software reset.
  * RETURN: VOID
  */
