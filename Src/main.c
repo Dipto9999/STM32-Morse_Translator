@@ -65,12 +65,12 @@ static char morse_code[NUMBER_CHARACTERS][LENGTH_MORSE_MAX] = {
 };
 
 
-/* Declare Buffer to Receive Data from UART Peripheral. */
+/* Declare Buffer to Transmit Data to UART Peripheral. */
 static uint8_t* tx_buff;
 /* Declare Variable for Message Prompt. */
 static char message_prompt[LENGTH_PROMPT_MAX];
 
-/* Declare Buffer to Transmit Data to UART Peripheral. */
+/* Declare Buffer to Receive Data from UART Peripheral. */
 static uint8_t rx_buff[LENGTH_PROMPT_MAX];
 /* Declare Variable for ASCII String to Convert into Morse Code. */
 static char phrase[LENGTH_PHRASE_MAX];
