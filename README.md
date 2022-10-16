@@ -16,7 +16,7 @@
 
 ## Overview
 
-This was originally designed as part of a <b>UBC Orbit Command and Data Handling (CDH)</b> subsystem assignment. However, it has been recently redesigned to further explore embedded programming practices on the <b>STM32 Nucleo Board</b>.
+This was originally designed as part of a <b>UBC Orbit Command and Data Handling (CDH)</b> subsystem assignment. However, it has been recently redesigned to further explore embedded software development practices on the <b>STM32 Nucleo Board</b>.
 
 <p align="center"><img src="Images/Board.JPG" width="60%" height="60%" title="Image of STM32 Nucleo Board" ></p>
 
