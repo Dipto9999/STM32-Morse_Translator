@@ -1,6 +1,6 @@
 # STM32 Morse Translator
 
-# Contents
+## Contents
 
 * [Overview](#Overview)
     * [Features](#Features)
