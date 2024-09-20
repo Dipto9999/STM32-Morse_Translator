@@ -55,7 +55,7 @@ The <b>PuTTY SSH</b> client is used to establish a terminal connection with the 
 
 <b>Direct Memory Access (i.e. DMA)</b> is used to receive and transmit data directly between the <b>UART</b> peripheral and the memory. This speeds up the operations involving the input of the phrase and the subsequent echoing of the input to the terminal. <b>Polling</b> (i.e. blocking) operations are implemented for <b>UART</b> transmissions in the setup and error handling as we intend for these to be sequential with the code execution.
 
-The ```void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);``` callback function for the <b>USART2</b> global interrupt was implemented in the [(`main.c`)](Inc/main.c) source file. This is called when the line is idle momentarily or the data transfer is complete.
+The ```void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);``` callback function for the <b>USART2</b> global interrupt was implemented in the [(`main.c`)](Src/main.c) source file. This is called when the line is idle momentarily or the data transfer is complete.
 
 <i>Note : <b>STM32CubeMX</b> initialized code was slightly modified to initialize the <b>DMA</b> prior to the <b>UART</b> peripheral. Otherwise the data would not be received in the intended buffer.</i>
 
