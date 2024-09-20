@@ -1,4 +1,4 @@
-# STM32 Morse Translator
+# STM32 : Morse Code Translator
 
 ## Contents
 
